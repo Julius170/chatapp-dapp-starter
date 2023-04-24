@@ -1,42 +1,45 @@
 import { ethers } from "ethers";
 import Web3Modal from "web3modal";
 
-import { ChatAppAddress, ChatAppABI } from "@/Context/constants";
+import { ChatAppAddress, ChatAppABI } from "../Context/constants";
 
-export const CheckIfWalletConnected = async () => {
+export const ChechIfWalletConnected = async () => {
   try {
-    if (!window.ethereum) return console.log("install metamask");
+    if (!window.ethereum) return console.log("Install MateMask");
 
     const accounts = await window.ethereum.request({
       method: "eth_accounts",
     });
 
     const firstAccount = accounts[0];
-
     return firstAccount;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 };
 
 export const connectWallet = async () => {
   try {
-    if (!window.ethereum) return console.log("install metamask");
+    // if (!window.ethereum) return console.log("Install MateMask");
+
+    // const accounts = await window.ethereum.request({
+    //   method: "eth_requestAccounts",
+    // });
+
+    if (!window.ethereum) return console.log("Install MetaMask");
 
     const accounts = await window.ethereum.request({
       method: "eth_requestAccounts",
     });
-
     const firstAccount = accounts[0];
-
     return firstAccount;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 };
 
 const fetchContract = (signerOrProvider) =>
-  new ethers.Contract(ChatAppABI, ChatAppAddress, signerOrProvider);
+  new ethers.Contract(ChatAppAddress, ChatAppABI, signerOrProvider);
 
 export const connectingWithContract = async () => {
   try {
@@ -45,10 +48,9 @@ export const connectingWithContract = async () => {
     const provider = new ethers.providers.Web3Provider(connection);
     const signer = provider.getSigner();
     const contract = fetchContract(signer);
-
     return contract;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -61,12 +63,12 @@ export const converTime = (time) => {
     newTime.getMinutes() +
     "/" +
     newTime.getSeconds() +
-    " Date:" +
+    "  Date:" +
     newTime.getDate() +
     "/" +
     (newTime.getMonth() + 1) +
     "/" +
     newTime.getFullYear();
 
-    return realTime
+  return realTime;
 };
