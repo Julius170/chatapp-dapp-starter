@@ -1,10 +1,17 @@
-const { ChatAppConnect } = require("../Context/ChatAppContext");
-const { useContext } = require("react");
+import React, { useEffect, useState, useContext } from "react";
+
+//INTERNAL IMPORT
+// import { ChatAppContect } from "../Context/ChatAppContext";
+import { Filter, Friend } from "../Components/index";
 
 const ChatApp = () => {
-  const {} = useContext(ChatAppConnect);
-
-  return <div>hey</div>;
+  // const {} = useContext(ChatAppContect);
+  return (
+    <div>
+      <Filter />
+      <Friend />
+    </div>
+  );
 };
 
 export default ChatApp;
